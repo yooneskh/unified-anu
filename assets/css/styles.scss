@@ -1,0 +1,424 @@
+/*
+  Prevent scroll lock
+
+  Thanks: Quasar.
+  I have also taken inspiration from Quasar framework which makes it super easy to handle scrollbar jerk
+*/
+html.scroll-lock {
+  position: fixed;
+  overflow-y: scroll;
+  top: var(--window-scroll-top);
+  width: 100%;
+}
+
+// SECTION Transitions
+
+// #region fade-transition
+// 👉 Fade
+$transition-name: 'fade';
+.#{$transition-name} {
+  &-move,
+  &-enter-active,
+  &-leave-active {
+    transition: opacity var(--#{$transition-name}-opacity-duration, 0.15s) var(--#{$transition-name}-opacity-timing, ease-in-out);
+  }
+
+  &-enter-from,
+  &-leave-to {
+    opacity: var(--#{$transition-name}-opacity, 0);
+  }
+
+  // Transition group
+  @at-root {
+    &-group {
+      .#{$transition-name}-leave-active {
+        position: absolute;
+        inset: 0;
+      }
+    }
+  }
+}
+// #endregion fade-transition
+
+// 👉 Scale
+$transition-name: 'scale';
+.#{$transition-name} {
+  &-move,
+  &-enter-active,
+  &-leave-active {
+    transition: scale var(--#{$transition-name}-scale-duration, 0.35s) var(--#{$transition-name}-scale-timing, cubic-bezier(0.33, 1, 0.68, 1)),
+      opacity var(--#{$transition-name}-opacity-duration, 0.15s) var(--#{$transition-name}-opacity-timing, ease-in-out);
+  }
+
+  &-enter-from,
+  &-leave-to {
+    opacity: var(--#{$transition-name}-opacity, 0);
+    // transform: scale(var(--#{$transition-name}-scale, 0.8)) !important;
+    // --un-scale-x: var(--#{$transition-name}-scale, 0.8);
+    // --un-scale-y: var(--#{$transition-name}-scale, 0.8);
+    scale: var(--#{$transition-name}-scale, 0.8);
+  }
+
+  // Transition group
+  @at-root {
+    &-group {
+      .#{$transition-name}-leave-active {
+        position: absolute;
+        inset: 0;
+      }
+    }
+  }
+}
+
+// 👉 Slide Y
+$transition-name: 'slide-y';
+.#{$transition-name} {
+  &-move,
+  &-enter-active,
+  &-leave-active {
+    transition: translate var(--#{$transition-name}-translate-duration, 0.35s) var(--#{$transition-name}-translate-timing, cubic-bezier(0.33, 1, 0.68, 1)),
+      opacity var(--#{$transition-name}-opacity-duration, 0.15s) var(--#{$transition-name}-opacity-timing, ease-in-out);
+  }
+
+  &-enter-from,
+  &-leave-to {
+    opacity: var(--#{$transition-name}-opacity, 0);
+    // transform: translateY(var(--#{$transition-name}-translateY, 8px));
+    // --un-translate-y: var(--#{$transition-name}-translateY, 8px);
+    translate: 0 var(--#{$transition-name}-translateY, 8px);
+  }
+
+  // Transition group
+  @at-root {
+    &-group {
+      .#{$transition-name}-leave-active {
+        position: absolute;
+        inset: 0;
+      }
+    }
+  }
+}
+
+// 👉 Slide Y Reverse
+$transition-name: 'slide-y-reverse';
+.#{$transition-name} {
+  &-move,
+  &-enter-active,
+  &-leave-active {
+    transition: translate var(--#{$transition-name}-translate-duration, 0.35s) var(--#{$transition-name}-translate-timing, cubic-bezier(0.33, 1, 0.68, 1)),
+      opacity var(--#{$transition-name}-opacity-duration, 0.15s) var(--#{$transition-name}-opacity-timing, ease-in-out);
+  }
+
+  &-enter-from,
+  &-leave-to {
+    opacity: var(--#{$transition-name}-opacity, 0);
+    // transform: translateY(var(--#{$transition-name}-translateY, -8px));
+    // --un-translate-y: var(--#{$transition-name}-translateY, -8px);
+    translate: 0 var(--#{$transition-name}-translateY, -8px);
+  }
+
+  // Transition group
+  @at-root {
+    &-group {
+      .#{$transition-name}-leave-active {
+        position: absolute;
+        inset: 0;
+      }
+    }
+  }
+}
+
+// 👉 Scroll Y
+$transition-name: 'scroll-y';
+.#{$transition-name} {
+  &-move,
+  &-enter-active,
+  &-leave-active {
+    transition: translate var(--#{$transition-name}-translate-duration, 0.35s) var(--#{$transition-name}-translate-timing, cubic-bezier(0.33, 1, 0.68, 1)),
+      opacity var(--#{$transition-name}-opacity-duration, 0.15s) var(--#{$transition-name}-opacity-timing, ease-in-out);
+  }
+
+  &-enter-from {
+    opacity: var(--#{$transition-name}-from-opacity, 0);
+    // transform: translateY(var(--#{$transition-name}-from-translateY, 8px)) !important;
+    // --un-translate-y: var(--#{$transition-name}-from-translateY, 8px);
+    translate: 0 var(--#{$transition-name}-from-translateY, 8px);
+  }
+
+  &-leave-to {
+    opacity: var(--#{$transition-name}-to-opacity, 0);
+    // transform: translateY(var(--#{$transition-name}-to-translateY, -8px)) !important;
+    // --un-translate-y: var(--#{$transition-name}-to-translateY, -8px);
+    translate: 0 var(--#{$transition-name}-to-translateY, -8px);
+  }
+
+    // Transition group
+  @at-root {
+    &-group {
+      .#{$transition-name}-leave-active {
+        position: absolute;
+        inset: 0;
+      }
+    }
+  }
+}
+
+// 👉 Scroll Y Reverse
+$transition-name: 'scroll-y-reverse';
+.#{$transition-name} {
+  &-move,
+  &-enter-active,
+  &-leave-active {
+    transition: translate var(--#{$transition-name}-translate-duration, 0.35s) var(--#{$transition-name}-translate-timing, cubic-bezier(0.33, 1, 0.68, 1)),
+      opacity var(--#{$transition-name}-opacity-duration, 0.15s) var(--#{$transition-name}-opacity-timing, ease-in-out);
+  }
+
+  &-enter-from {
+    opacity: var(--#{$transition-name}-from-opacity, 0);
+    // transform: translateY(var(--#{$transition-name}-from-translateY, -8px)) !important;
+    // --un-translate-y: var(--#{$transition-name}-from-translateY, -8px);
+    translate: 0 var(--#{$transition-name}-from-translateY, -8px);
+  }
+
+  &-leave-to {
+    opacity: var(--#{$transition-name}-to-opacity, 0);
+    // transform: translateY(var(--#{$transition-name}-to-translateY, 8px)) !important;
+    // --un-translate-y: var(--#{$transition-name}-to-translateY, 8px);
+    translate: 0 var(--#{$transition-name}-to-translateY, 8px);
+  }
+
+    // Transition group
+  @at-root {
+    &-group {
+      .#{$transition-name}-leave-active {
+        position: absolute;
+        inset: 0;
+      }
+    }
+  }
+}
+
+// 👉 Slide X
+$transition-name: 'slide-x';
+.#{$transition-name} {
+  &-move,
+  &-enter-active,
+  &-leave-active {
+    transition: translate var(--#{$transition-name}-translate-duration, 0.35s) var(--#{$transition-name}-translate-timing, cubic-bezier(0.33, 1, 0.68, 1)),
+      opacity var(--#{$transition-name}-opacity-duration, 0.15s) var(--#{$transition-name}-opacity-timing, ease-in-out);
+  }
+
+  &-enter-from,
+  &-leave-to {
+    opacity: var(--#{$transition-name}-opacity, 0);
+    // transform: translateX(var(--#{$transition-name}-translateX, -8px)) !important;
+    // --un-translate-x: var(--#{$transition-name}-translateX, -8px);
+    translate: var(--#{$transition-name}-translateX, -8px) 0;
+  }
+
+  // Transition group
+  @at-root {
+    &-group {
+      .#{$transition-name}-leave-active {
+        position: absolute;
+        inset: 0;
+      }
+    }
+  }
+}
+
+// 👉 Slide X Reverse
+$transition-name: 'slide-x-reverse';
+.#{$transition-name} {
+  &-move,
+  &-enter-active,
+  &-leave-active {
+    transition: translate var(--#{$transition-name}-translate-duration, 0.35s) var(--#{$transition-name}-translate-timing, cubic-bezier(0.33, 1, 0.68, 1)),
+      opacity var(--#{$transition-name}-opacity-duration, 0.15s) var(--#{$transition-name}-opacity-timing, ease-in-out);
+  }
+
+  &-enter-from,
+  &-leave-to {
+    opacity: var(--#{$transition-name}-opacity, 0);
+    // transform: translateX(var(--#{$transition-name}-translateX, 8px)) !important;
+    // --un-translate-x: var(--#{$transition-name}-translateX, 8px);
+    translate: var(--#{$transition-name}-translateX, 8px) 0;
+  }
+
+  // Transition group
+  @at-root {
+    &-group {
+      .#{$transition-name}-leave-active {
+        position: absolute;
+        inset: 0;
+      }
+    }
+  }
+}
+
+// 👉 Scroll X
+$transition-name: 'scroll-x';
+.#{$transition-name} {
+  &-move,
+  &-enter-active,
+  &-leave-active {
+    transition: translate var(--#{$transition-name}-translate-duration, 0.35s) var(--#{$transition-name}-translate-timing, cubic-bezier(0.33, 1, 0.68, 1)),
+      opacity var(--#{$transition-name}-opacity-duration, 0.15s) var(--#{$transition-name}-opacity-timing, ease-in-out);
+  }
+
+  &-enter-from {
+    opacity: var(--#{$transition-name}-from-opacity, 0);
+    // transform: translateX(var(--#{$transition-name}-from-translateX, -8px)) !important;
+    // --un-translate-x: var(--#{$transition-name}-from-translateX, -8px);
+    translate: var(--#{$transition-name}-from-translateX, -8px) 0;
+  }
+
+  &-leave-to {
+    opacity: var(--#{$transition-name}-to-opacity, 0);
+    // transform: translateX(var(--#{$transition-name}-to-translateX, 8px)) !important;
+    // --un-translate-x: var(--#{$transition-name}-to-translateX, 8px);
+    translate: var(--#{$transition-name}-to-translateX, 8px) 0;
+  }
+
+    // Transition group
+  @at-root {
+    &-group {
+      .#{$transition-name}-leave-active {
+        position: absolute;
+        inset: 0;
+      }
+    }
+  }
+}
+
+// 👉 Scroll X Reverse
+$transition-name: 'scroll-x-reverse';
+.#{$transition-name} {
+  &-move,
+  &-enter-active,
+  &-leave-active {
+    transition: translate var(--#{$transition-name}-translate-duration, 0.35s) var(--#{$transition-name}-translate-timing, cubic-bezier(0.33, 1, 0.68, 1)),
+      opacity var(--#{$transition-name}-opacity-duration, 0.15s) var(--#{$transition-name}-opacity-timing, ease-in-out);
+  }
+
+  &-enter-from {
+    opacity: var(--#{$transition-name}-from-opacity, 0);
+    // transform: translateX(var(--#{$transition-name}-from-translateX, 8px)) !important;
+    // --un-translate-x: var(--#{$transition-name}-from-translateX, 8px);
+    translate: var(--#{$transition-name}-from-translateX, 8px) 0;
+  }
+
+  &-leave-to {
+    opacity: var(--#{$transition-name}-to-opacity, 0);
+    // transform: translateX(var(--#{$transition-name}-to-translateX, -8px)) !important;
+    // --un-translate-x: var(--#{$transition-name}-to-translateX, -8px);
+    translate: var(--#{$transition-name}-to-translateX, -8px) 0;
+  }
+
+    // Transition group
+  @at-root {
+    &-group {
+      .#{$transition-name}-leave-active {
+        position: absolute;
+        inset: 0;
+      }
+    }
+  }
+}
+
+// 👉 Dialog
+.dialog-enter-active {
+  transition: scale 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.18s cubic-bezier(0.5, 1, 0.89, 1);
+}
+
+.dialog-leave-active {
+  transition: scale 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.25s cubic-bezier(0, 0.55, 0.45, 1);
+}
+
+.dialog-enter-from,
+.dialog-leave-to {
+  opacity: 0;
+  // transform: scale(0.45) !important;
+  // --un-scale-x: 0.45;
+  // --un-scale-y: 0.45;
+  scale: 0.45;
+}
+
+// 👉 View (component)
+$transition-name: 'view-next';
+.#{$transition-name} {
+  &-move,
+  &-enter-active,
+  &-leave-active {
+    transition: translate var(--#{$transition-name}-translate-duration, 0.35s) var(--#{$transition-name}-translate-timing, cubic-bezier(0.33, 1, 0.68, 1));
+  }
+
+  &-enter-from {
+    // transform: translateX(var(--#{$transition-name}-from-translateX, 100%)) !important;
+    // --un-translate-x: var(--#{$transition-name}-from-translateX, 100%);
+    translate: var(--#{$transition-name}-from-translateX, 100%) 0;
+  }
+
+  &-leave-to {
+    // transform: translateX(var(--#{$transition-name}-to-translateX, -100%)) !important;
+    // --un-translate-x: var(--#{$transition-name}-to-translateX, -100%);
+    translate: var(--#{$transition-name}-to-translateX, -100%) 0;
+  }
+
+  // Transition group
+  @at-root {
+    &-group {
+      .#{$transition-name}-leave-active {
+        position: absolute;
+        inset: 0;
+      }
+    }
+  }
+}
+
+$transition-name: 'view-previous';
+.#{$transition-name} {
+  &-move,
+  &-enter-active,
+  &-leave-active {
+    transition: translate var(--#{$transition-name}-translate-duration, 0.35s) var(--#{$transition-name}-translate-timing, cubic-bezier(0.33, 1, 0.68, 1));
+  }
+
+  &-enter-from {
+    // transform: translateX(var(--#{$transition-name}-from-translateX, -100%)) !important;
+    // --un-translate-x: var(--#{$transition-name}-from-translateX, -100%);
+    translate: var(--#{$transition-name}-from-translateX, -100%) 0;
+  }
+
+  &-leave-to {
+    // transform: translateX(var(--#{$transition-name}-to-translateX, 100%)) !important;
+    // --un-translate-x: var(--#{$transition-name}-to-translateX, 100%);
+    translate: var(--#{$transition-name}-to-translateX, 100%) 0;
+  }
+
+  // Transition group
+  @at-root {
+    &-group {
+      .#{$transition-name}-leave-active {
+        position: absolute;
+        inset: 0;
+      }
+    }
+  }
+}
+
+// 👉 Bg
+.bg-enter-active,
+.bg-leave-active {
+  transition: background-color 0.2s ease-in-out;
+}
+
+.bg-enter-from,
+.bg-leave-to {
+  background-color: transparent !important;
+}
+
+// !SECTION
+
