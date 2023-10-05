@@ -7,6 +7,9 @@ useHead({
 });
 
 
+const model1 = ref(false);
+
+
 </script>
 
 
@@ -262,6 +265,146 @@ useHead({
           subtitle="Goodbye to subtitle"
           text="This is the text of the thing. This is the text of the thing."
         />
+
+      </div>
+
+    </div>
+
+    <div class="pa-4">
+
+      <div class="text-lg font-bold">
+        Checkbox
+      </div>
+
+      <div class="flex items-start gap-4 mt-3">
+
+        <u-checkbox
+          label="Hello"
+          v-model="model1"
+        />
+
+        <u-checkbox
+          label="Hello"
+          icon="i-heroicons-user"
+          v-model="model1"
+        />
+
+        <u-checkbox
+          label="Hello"
+          icon="i-heroicons-user"
+          color="warning"
+          v-model="model1"
+        />
+
+        <u-checkbox
+          label="Hello"
+          disabled
+          v-model="model1"
+        />
+
+        <u-checkbox
+          label="Hello"
+          cycle-indeterminate
+          indeterminate-value="5"
+          v-model="model1"
+        />
+
+      </div>
+
+    </div>
+
+    <div class="pa-4">
+
+      <div class="text-lg font-bold">
+        Chip
+      </div>
+
+      <div class="flex items-start gap-2 mt-3">
+
+        <u-chip
+          label="Hello"
+        />
+
+        <u-chip
+          color="danger"
+          label="Danger!"
+        />
+
+        <u-chip
+          variant="fill"
+          color="warning"
+          label="Warn!"
+        />
+
+        <u-chip
+          variant="fill"
+          color="success"
+          label="New User"
+          append-icon="i-heroicons-user"
+        />
+
+        <u-chip
+          variant="outline"
+          label="Up and Down"
+          icon="i-heroicons-chevron-down"
+          append-icon="i-heroicons-chevron-up"
+        />
+
+        <u-chip
+          label="What to do?"
+          closable
+        />
+
+      </div>
+
+    </div>
+
+    <div class="pa-4">
+
+      <div class="text-lg font-bold">
+        Base Input
+      </div>
+
+      <div class="flex items-start gap-2 mt-3">
+
+        <u-base-input
+          label="Field Label">
+          Content
+        </u-base-input>
+        
+        <u-base-input
+          label="Field Label"
+          prepend-icon="i-heroicons-plus"
+          append-icon="i-heroicons-plus"
+          prepend-inner-icon="i-heroicons-plus"
+          append-inner-icon="i-heroicons-plus">
+          Content
+        </u-base-input>
+        
+        <u-base-input
+          label="Field Label"
+          input-wrapper-classes="bg-red"
+          input-classes="text-blue">
+          Content
+        </u-base-input>
+
+        <u-base-input
+          label="Field Label"
+          hint="Do this">
+          Content
+        </u-base-input>
+        
+        <u-base-input
+          label="Field Label"
+          success="Correct">
+          Content
+        </u-base-input>
+
+        <u-base-input
+          label="Field Label"
+          error="Nope">
+          Content
+        </u-base-input>
 
       </div>
 

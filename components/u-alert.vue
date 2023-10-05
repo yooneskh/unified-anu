@@ -12,6 +12,10 @@ const props = defineProps({
     type: String,
     default: 'primary',
   },
+  states: {
+    type: Boolean,
+    default: false,
+  },
 
   icon: {
     type: String,
@@ -35,18 +39,25 @@ const props = defineProps({
     default: undefined,
   },
 
-  states: {
+  modelValue: {
     type: Boolean,
-    default: false,
+    default: true,
   },
 
 });
 
-const modelValue = defineModel({
-  type: Boolean,
-  default: true,
-  local: true,
-});
+
+import { useVModel } from '@vueuse/core';
+
+const modelValue = useVModel(
+  props,
+  'modelValue',
+  emit,
+  {
+    defaultValue: true,
+    passive: true,
+  }
+);
 
 
 defineOptions({
@@ -55,6 +66,7 @@ defineOptions({
 
 
 const emit = defineEmits([
+  'update:modelValue',
   'click:appendIcon',
 ]);
 

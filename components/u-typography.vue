@@ -5,15 +5,15 @@
 const props = defineProps({
   
   title: {
-    type: String,
+    type: [String, Array],
     default: undefined,
   },
   subtitle: {
-    type: String,
+    type: [String, Array],
     default: undefined,
   },
   text: {
-    type: String,
+    type: [String, Array],
     default: undefined,
   },
 

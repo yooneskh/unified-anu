@@ -9,7 +9,4 @@ export default defineNuxtConfig({
     '~/assets/css/preset.css',
     '~/assets/css/styles.scss',
   ],
-  vue: {
-    defineModel: true,
-  },
 });
