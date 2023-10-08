@@ -2,7 +2,7 @@
 
 /* constants */
 
-const CARD_TYPOGRAPHY_SLOTS = {
+const LOADER_TYPOGRAPHY_SLOTS = {
   'title': (_) => null,
   'subtitle': (_) => null,
   'header-right': (_) => null,
@@ -12,16 +12,13 @@ const CARD_TYPOGRAPHY_SLOTS = {
 /* interface */
 
 const props = defineProps({
+  
+  loading: {
+    type: Boolean,
+    default: false,
+  },
 
-  variant: {
-    type: String,
-    default: 'text',
-  },
-  color: {
-    type: String,
-    default: undefined,
-  },
-  states: {
+  fullPage: {
     type: Boolean,
     default: false,
   },
@@ -38,6 +35,7 @@ const props = defineProps({
     type: String,
     default: undefined,
   },
+
   titleTag: {
     type: String,
     default: 'p',
@@ -60,37 +58,32 @@ const props = defineProps({
     default: undefined,
   },
 
-  img: {
-    type: String,
-    default: undefined,
-  },
-  imgAlt: {
-    type: String,
-    default: undefined,
-  },
-
-  disabled: {
-    type: Boolean,
-    default: false,
-  },
-  loading: {
-    type: [Boolean, Object],
-    default: false,
-  },
-
 });
 
 
 defineOptions({
-  name: 'UCard',
+  name: 'ULoader',
 });
+
+
+/* was shown */
+
+import { watchOnce } from '@vueuse/core';
+
+const isShownOnce = ref(props.loading);
+
+watchOnce(
+  () => props.loading,
+  () => { isShownOnce.value = true },
+);
 
 
 /* typography */
 
 import { isTypographyUsed, filterUsedSlots } from '../tools/utils';
 
-const slots = useSlots();
+
+const slots = useSlots()
 
 const isAnyTypographyUsed = computed(() =>
   isTypographyUsed(toRefs(props), slots)
@@ -112,48 +105,44 @@ else {
 }
 
 
-/* layer */
+/* fullpage */
 
-const { getLayerClasses } = useLayer();
-
-const { styles, classes } = getLayerClasses(
-  toRef(props, 'color'),
-  toRef(props, 'variant'),
-  toRef(props, 'states'),
-);
+if (props.fullPage) {
+  useDOMScrollLock(toRef(props, 'loading'));
+}
 
 </script>
 
 
 <template>
   <div
-    class="a-card relative overflow-hidden bg-[hsla(var(--a-surface-c),var(--un-bg-opacity,1))]"
-    :class="classes"
-    :style="styles">
+    v-if="isShownOnce"
+    v-show="props.loading"
+    class="a-loader overlay flex items-center justify-center flex-col text-center gap-4"
+    :class="{
+      'opacity-100': props.loading,
+      'a-loader-full-page fixed inset-0 z-54': props.fullPage,
+    }">
 
-    <u-loader
-      v-if="props.loading === true"
-      loading
-    />
-
-    <img
-      v-if="props.img"
-      :src="props.img"
-      :alt="props.imgAlt"
-    />
+    <slot>
+      <u-spinner
+        class="a-loader-spinner text-[hsl(var(--a-layer-c))]"
+      />
+    </slot>
 
     <div
       v-if="isAnyTypographyUsed"
-      class="a-card-typography-wrapper">
+      class="a-loader-typography-wrapper">
       <u-typography
         :title="props.title"
         :subtitle="props.subtitle"
         :text="Object.values(textProp)"
         :icon="props.icon"
-        :append-icon="props.appendIcon">
+        :append-icon="props.appendIcon"
+        style="--a-title-c: var(--a-layer-c); --a-subtitle-c: var(--a-layer-c)">
 
         <template
-          v-for="name in filterUsedSlots(CARD_TYPOGRAPHY_SLOTS)"
+          v-for="name in filterUsedSlots(LOADER_TYPOGRAPHY_SLOTS)"
           #[name]="slotProps">
           <slot
             :name="name"
@@ -163,8 +152,5 @@ const { styles, classes } = getLayerClasses(
 
       </u-typography>
     </div>
-
-    <slot />
-
   </div>
 </template>

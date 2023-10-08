@@ -8,7 +8,7 @@ useHead({
 
 
 const model1 = ref(false);
-
+const model2 = ref(false);
 
 </script>
 
@@ -405,6 +405,51 @@ const model1 = ref(false);
           error="Nope">
           Content
         </u-base-input>
+
+      </div>
+
+    </div>
+
+    <div class="pa-4">
+
+      <div class="text-lg font-bold">
+        Loader
+      </div>
+
+      <div class="flex items-start gap-2 mt-3">
+
+        <div class="relative h-100px w-100px rounded shadow">
+          <u-loader loading />
+        </div>
+
+        <div class="relative h-160px w-200px rounded shadow">
+          <u-loader loading title="Hello" subtitle="You should see" />
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="pa-4">
+
+      <div class="text-lg font-bold">
+        Dialog
+      </div>
+
+      <div class="flex items-start gap-2 mt-3">
+
+        <u-btn
+          label="Open Dialog"
+          @click="model2 = !model2;"
+        />
+
+        <u-dialog
+          v-model="model2"
+          icon="i-heroicons-user"
+          title="Hello there"
+          subtitle="Welcome to here."
+          text="This is the greatest things."
+        />
 
       </div>
 
