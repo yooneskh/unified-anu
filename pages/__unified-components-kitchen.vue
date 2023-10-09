@@ -9,6 +9,8 @@ useHead({
 
 const model1 = ref(false);
 const model2 = ref(false);
+const model3 = ref(false);
+const model4 = ref(false);
 
 </script>
 
@@ -450,6 +452,55 @@ const model2 = ref(false);
           subtitle="Welcome to here."
           text="This is the greatest things."
         />
+
+      </div>
+
+    </div>
+
+    <div class="pa-4">
+
+      <div class="text-lg font-bold">
+        Drawer
+      </div>
+
+      <div class="flex items-start gap-2 mt-3">
+
+        <u-btn
+          label="Open Drawer"
+          @click="model3 = !model3;"
+        />
+
+        <u-drawer
+          v-model="model3"
+          icon="i-heroicons-user"
+          title="Hello there"
+          subtitle="Welcome to here."
+          text="This is the greatest things.">
+
+          <p class="px-5 mt-4">
+            Rest of the content.
+          </p>
+
+        </u-drawer>
+
+        <u-btn
+          label="Open Top Drawer"
+          @click="model4 = !model4;"
+        />
+
+        <u-drawer
+          v-model="model4"
+          anchor="top"
+          icon="i-heroicons-user"
+          title="Hello there"
+          subtitle="Welcome to here."
+          text="This is the greatest things.">
+
+          <p class="px-5 mt-4">
+            Rest of the content.
+          </p>
+
+        </u-drawer>
 
       </div>
 
