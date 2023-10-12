@@ -506,5 +506,79 @@ const model4 = ref(false);
 
     </div>
 
+    <div class="pa-4">
+
+      <div class="text-lg font-bold">
+        Menu
+      </div>
+
+      <div class="flex items-start gap-2 mt-3">
+
+        <u-btn label="Menu">
+          <u-menu>
+            Hi There!
+          </u-menu>
+        </u-btn>
+
+        <u-btn label="Menu Top">
+          <u-menu placement="top-start">
+            Hi There!
+          </u-menu>
+        </u-btn>
+
+        <u-btn label="Menu End">
+          <u-menu placement="right-center">
+            Hi There!
+          </u-menu>
+        </u-btn>
+
+        <u-btn label="Menu Persist">
+          <u-menu placement="top-center" persist>
+            Hi There!
+          </u-menu>
+        </u-btn>
+
+        <u-btn label="Menu Hover">
+          <u-menu placement="top-center" trigger="hover">
+            Hi There!
+          </u-menu>
+        </u-btn>
+
+      </div>
+
+    </div>
+
+    <div class="pa-4">
+
+      <div class="text-lg font-bold">
+        Tooltip
+      </div>
+
+      <div class="flex items-start gap-2 mt-3">
+
+        <u-btn label="Tooltip">
+          <u-tooltip
+            text="Hello Tooltip!"
+          />
+        </u-btn>
+
+        <u-btn label="Tooltip Right">
+          <u-tooltip
+            text="Hello Tooltip!"
+            placement="right"
+          />
+        </u-btn>
+
+        <u-btn label="Tooltip Content">
+          <u-tooltip>
+            <u-icon icon="i-heroicons-user" />
+            Hi
+          </u-tooltip>
+        </u-btn>
+
+      </div>
+
+    </div>
+
   </div>
 </template>
