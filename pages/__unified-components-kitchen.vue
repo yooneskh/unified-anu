@@ -11,6 +11,9 @@ const model1 = ref(false);
 const model2 = ref(false);
 const model3 = ref(false);
 const model4 = ref(false);
+const model5 = ref('');
+const model6 = ref('');
+const model7 = ref(0);
 
 </script>
 
@@ -98,6 +101,27 @@ const model4 = ref(false);
 
         <u-spinner
           class="text-primary text-2xl"
+        />
+
+      </div>
+
+    </div>
+
+    <div class="pa-4">
+
+      <div class="text-lg font-bold">
+        Loading Icon
+      </div>
+
+      <div class="flex items-start gap-2 mt-3">
+
+        <u-loading-icon
+          icon="i-heroicons-user"
+        />
+
+        <u-loading-icon
+          icon="i-heroicons-user"
+          loading
         />
 
       </div>
@@ -575,6 +599,73 @@ const model4 = ref(false);
             Hi
           </u-tooltip>
         </u-btn>
+
+      </div>
+
+    </div>
+
+    <div class="pa-4">
+
+      <div class="text-lg font-bold">
+        Input
+      </div>
+
+      <div class="flex items-start gap-2 mt-3">
+
+        <u-input
+          label="Text Input"
+          :hint="model5"
+          v-model="model5"
+        />
+
+        <u-input
+          label="Text Input"
+          prepend-icon="i-heroicons-user"
+          prepend-inner-icon="i-heroicons-user"
+          append-icon="i-heroicons-user"
+          append-inner-icon="i-heroicons-user"
+          success="This is ok"
+        />
+
+      </div>
+
+    </div>
+
+    <div class="pa-4">
+
+      <div class="text-lg font-bold">
+        Radio
+      </div>
+
+      <div class="flex items-start gap-2 mt-3">
+
+        <u-radio
+          label="Male"
+          value="male"
+          v-model="model6"
+        />
+
+        <u-radio
+          label="Female"
+          value="female"
+          v-model="model6"
+        />
+
+      </div>
+
+    </div>
+
+    <div class="pa-4">
+
+      <div class="text-lg font-bold">
+        Rating
+      </div>
+
+      <div class="flex items-start gap-2 mt-3">
+
+        <u-rating
+          v-model="model7"
+        />
 
       </div>
 
