@@ -47,6 +47,12 @@ const props = defineProps({
 });
 
 
+const emit = defineEmits([
+  'update:modelValue',
+  'click:appendIcon',
+]);
+
+
 import { useVModel } from '@vueuse/core';
 
 const modelValue = useVModel(
@@ -63,12 +69,6 @@ const modelValue = useVModel(
 defineOptions({
   name: 'UAlert',
 });
-
-
-const emit = defineEmits([
-  'update:modelValue',
-  'click:appendIcon',
-]);
 
 
 /* append icon */

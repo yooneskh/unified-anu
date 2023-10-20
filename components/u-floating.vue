@@ -64,6 +64,13 @@ const props = defineProps({
 });
 
 
+const emit = defineEmits([
+  'update:modelValue',
+  'show',
+  'hide',
+]);
+
+
 import { onClickOutside, useVModel } from '@vueuse/core';
 
 const modelValue = useVModel(
@@ -81,13 +88,6 @@ defineOptions({
   name: 'UFloating',
   inheritAttrs: false,
 });
-
-
-const emit = defineEmits([
-  'update:modelValue',
-  'show',
-  'hide',
-]);
 
 
 /* teleport */

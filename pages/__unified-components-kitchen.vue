@@ -671,5 +671,50 @@ const model7 = ref(0);
 
     </div>
 
+    <div class="pa-4">
+
+      <div class="text-lg font-bold">
+        List Item
+      </div>
+
+      <div class="flex items-start gap-2 mt-3">
+
+        <u-list-item
+          title="Title"
+          subtitle="Subtitle"
+          text="This is the text."
+          icon="i-heroicons-user"
+          append-icon="i-heroicons-user"
+          :avatar="{ src: 'https://picsum.photos/64' }"
+          :append-avatar="{ src: 'https://picsum.photos/64' }"
+        />
+
+      </div>
+
+    </div>
+
+    <div class="pa-4">
+
+      <div class="text-lg font-bold">
+        List
+      </div>
+
+      <div class="flex items-start gap-2 mt-3">
+
+        <u-list
+          :items="[
+            {
+              title: 'Hello',
+              subtitle: 'There are',
+              icon: 'i-heroicons-user',
+            },
+            'Second Title'
+          ]"
+        />
+
+      </div>
+
+    </div>
+
   </div>
 </template>
